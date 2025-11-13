@@ -42,26 +42,33 @@ RegisterNumber: 24901129
 */
 ```
 ```
-module exp9(T,clk,Q,Qbar);
-input T,clk;
-output reg Q;
-output reg Qbar;
-initial Q=0;
-initial Qbar=1;
-always @(posedge clk)
+module DE1( input clk, rst_n, input t,
+output reg q,
+output q_bar
+);
+always@(posedge clk) 
 begin 
-Q=(T&(~Q))|((~T)&Q);
-Qbar=~Q;
+if(!rst_n)
+q<=0;
+else
+if(t)
+q<=~q;
+else
+q<=q;
 end
+assign q_bar = ~q;
 endmodule
 ```
 **RTL LOGIC FOR FLIPFLOPS**
-![image](https://github.com/user-attachments/assets/9f3a974e-433e-426a-9fac-5b3759072c39)
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/24919d73-c1ca-498e-a0ed-c0a1e2d819b6" />
+
 
 
 **TIMING DIGRAMS FOR FLIP FLOPS**
-![image](https://github.com/user-attachments/assets/0112237b-5a1a-4b0b-bcf4-c65dd7adc38c)
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/8b41ad3d-c99f-4816-a3c1-f34058a5b204" />
+
 
 
 **RESULTS**
+
 Thus the T flipflop is implemented and verified successfully.
